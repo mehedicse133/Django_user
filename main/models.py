@@ -1,7 +1,7 @@
 
 from django.contrib.auth.hashers import make_password
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser,BaseUserManager , PermissionsMixin
 
 # AUTH_USER_MODEL = 'user.CustomUser'
 
@@ -21,7 +21,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email,password, **extra_fields)  
 
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=200, unique = True,)
     username = models.CharField(max_length = 255 , unique = True)
     
